@@ -9,7 +9,7 @@ An [Alfred 5](https://www.alfredapp.com/) workflow that puts [Mole](https://gith
 
 ## Install
 
-1. Download `Mole.alfredworkflow` from this repo.
+1. Download `Mole.alfredworkflow` from the [latest release](https://github.com/nigelayen/MoleAlfred/releases/latest).
 2. Double-click it and click **Import** in Alfred.
 
 The workflow looks for `mo` at `/opt/homebrew/bin/mo`, then `/usr/local/bin/mo`. If yours lives elsewhere, set **mo path** in the workflow's configuration.

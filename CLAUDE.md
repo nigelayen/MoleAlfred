@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An Alfred 5 workflow (`fit.mole.alfred`, keyword `mo`) that fronts the [Mole](https://github.com/tw93/Mole) CLI (`mo`) for cleaning, uninstalling, analyzing and monitoring a Mac. There is no package manager, test suite, or linter. Git repo on `main`, remote `origin` is https://github.com/nigelayen/MoleAlfred (public, MIT). `src/info.plist` and `cache/` are gitignored.
+An Alfred 5 workflow (`fit.mole.alfred`, keyword `mo`) that fronts the [Mole](https://github.com/tw93/Mole) CLI (`mo`) for cleaning, uninstalling, analyzing and monitoring a Mac. There is no package manager, test suite, or linter. Git repo on `main`, remote `origin` is https://github.com/nigelayen/MoleAlfred (public, MIT). `src/info.plist`, `cache/` and `Mole.alfredworkflow` are gitignored.
 
 ## Build
 
@@ -16,7 +16,7 @@ python3 build.py src Mole.alfredworkflow
 1. **Regenerates `src/info.plist` from scratch** (node graph, connections, user config, readme from `src/README.md`). Never hand-edit `src/info.plist` — changes are overwritten. Edit the dicts in `build.py` instead. Node UIDs are fresh random UUIDs every build, so the plist diff is noisy by design.
 2. Zips `info.plist`, `mole.js` (marked executable), and `icon.png` into the `.alfredworkflow`. Any new file the workflow needs at runtime must be added to the list in the zip loop.
 
-`Mole.alfredworkflow` at the root is the build artifact; double-click it to install into Alfred. `cache/apps.json` is a sample/leftover of the runtime cache and is not part of the build.
+`Mole.alfredworkflow` at the root is the build artifact (gitignored; published as a GitHub Release asset, not committed); double-click it to install into Alfred. `cache/apps.json` is a sample/leftover of the runtime cache and is not part of the build.
 
 ## Architecture
 
