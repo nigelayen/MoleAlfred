@@ -25,7 +25,7 @@ function cached(name, maxAgeSec, cmd) {
 const gb = b => (b / 1e9).toFixed(1) + ' GB';
 const out = (items, extra) => JSON.stringify(Object.assign({ items }, extra || {}));
 
-// [subcommand, title, subtitle, icon, dry-run supported, accepts argument]
+// [subcommand, title, subtitle, icon, dry-run supported, accepts argument, dry-run subcommand override]
 const COMMANDS = [
   ['clean', 'Clean', 'Free up disk space (caches, logs, temp files, leftovers)', 'FullTrashIcon', true],
   ['uninstall', 'Uninstall', 'Remove apps completely — type a name to search apps', 'ToolbarDeleteIcon', true, true],
@@ -36,21 +36,28 @@ const COMMANDS = [
   ['purge', 'Purge', 'Remove old project artifacts (node_modules, build dirs…)', 'DeveloperFolderIcon', true],
   ['installer', 'Installer', 'Find and remove installer files (.dmg, .pkg)', 'DownloadsFolder', true],
   ['slim', 'Slim', 'Remove Intel code from universal apps', 'GenericApplicationIcon', true],
-  ['touchid', 'Touch ID', 'Configure Touch ID for sudo', 'LockedIcon', false],
+  ['touchid', 'Touch ID', 'Configure Touch ID for sudo', 'LockedIcon', true, false, 'touchid enable --dry-run'],
   ['update', 'Update', 'Update Mole to the latest version', 'ToolbarCustomizeIcon', false],
   ['', 'Main Menu', 'Open the interactive Mole menu', 'General', false],
 ];
 
 function commandItems(filter) {
-  return COMMANDS.filter(c => !filter || (c[0] + ' ' + c[1]).toLowerCase().includes(filter))
-    .map(([cmd, title, sub, ic, dry, takesArg]) => {
+  // Typing "dry" or "preview" lists only the --dry-run variants as visible results.
+  const dryOnly = /\b(dry|preview)/.test(filter);
+  const f = filter.replace(/\b(dry-?run|dry|preview)\b/g, '').trim();
+  return COMMANDS.filter(c => (!dryOnly || c[4]) && (!f || (c[0] + ' ' + c[1]).toLowerCase().includes(f)))
+    .map(([cmd, title, sub, ic, dry, takesArg, dryCmd]) => {
       const full = (MO + ' ' + cmd).trim();
+      const dryFull = dry ? MO + ' ' + (dryCmd || cmd + ' --dry-run') : '';
       const item = {
-        uid: 'mole-' + (cmd || 'menu'), title, subtitle: sub, icon: icon(ic),
-        arg: full, autocomplete: cmd ? cmd + ' ' : '', valid: true,
-        text: { copy: full }, variables: { mode: 'terminal' },
+        uid: 'mole-' + (cmd || 'menu') + (dryOnly ? '-dry' : ''),
+        title: dryOnly ? title + ' (dry run)' : title,
+        subtitle: dryOnly ? 'Preview only, makes no changes' : sub + (dry ? ' · ⌘↵ preview' : ''),
+        icon: icon(ic),
+        arg: dryOnly ? dryFull : full, autocomplete: cmd ? cmd + ' ' : '', valid: true,
+        text: { copy: dryOnly ? dryFull : full }, variables: { mode: 'terminal' },
         mods: {
-          cmd: dry ? { arg: full + ' --dry-run', subtitle: '⌘ Preview only (--dry-run)', valid: true }
+          cmd: dry ? { arg: dryOnly ? full : dryFull, subtitle: dryOnly ? '⌘ Run for real' : '⌘ Preview only (--dry-run)', valid: true }
                    : { subtitle: 'No dry-run for this command', valid: false },
         },
       };

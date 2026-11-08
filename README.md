@@ -21,6 +21,7 @@ Type `mo` in Alfred.
 | Keyword | What it does |
 | --- | --- |
 | `mo` | Lists all Mole commands (clean, uninstall, optimize, analyze, status, history, purge, installer, slim, touchid, update). |
+| `mo dry` | Lists only the `--dry-run` previews (also matches `preview`, e.g. `mo clean dry`). |
 | `mo status` | Live health, CPU, memory, disks and trash, refreshed every 2 seconds. |
 | `mo uninstall <app>` | Searches installed apps. |
 | `mo analyze <path>` | Explores disk usage of a path. Leave blank for the whole machine. |
@@ -31,7 +32,7 @@ Type `mo` in Alfred.
 | Key | Action |
 | --- | --- |
 | `↵` | Run the command in your terminal |
-| `⌘↵` | Preview only (`--dry-run`), where the command supports it |
+| `⌘↵` | Preview only (`--dry-run`), where the command supports it. Rows that support it say so in the subtitle. Touch ID previews `mo touchid enable --dry-run`. |
 | `⌥↵` | On an app in `mo uninstall`: also select personal data |
 | `⌃↵` | On an app in `mo uninstall`: reveal it in Finder |
 | `⇥` | Drill into a command |

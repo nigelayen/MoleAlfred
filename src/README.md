@@ -1,6 +1,7 @@
 Type `mo` in Alfred.
 
 • `mo` — list Mole commands. ↵ runs it in your Alfred terminal, ⌘↵ runs a --dry-run preview, ⇥ drills in.
+• `mo dry` — list only the --dry-run previews.
 • `mo status` — live health, CPU, memory, disks, trash (refreshes every 2s). ↵ opens the dashboard.
 • `mo uninstall <app>` — search installed apps. ↵ uninstall, ⌘↵ dry-run, ⌥↵ include personal data, ⌃↵ reveal in Finder.
 • `mo analyze <path>` — scan a path (blank = whole machine).
