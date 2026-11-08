@@ -57,6 +57,10 @@ osascript -l JavaScript src/mole.js "status "
 
 `src/mole.js` is a JXA Script Filter that calls `mo` (using its `--json` output for `status`, `history` and `uninstall --list`) and returns Alfred result items. Each item carries the full command as its argument, and a conditional routes it to Run in Terminal, Reveal in Finder or Open File.
 
+## License
+
+[MIT](LICENSE)
+
 ## Credits
 
 Built on [Mole](https://github.com/tw93/Mole) by tw93. This workflow is an unofficial front-end and is not affiliated with that project.
