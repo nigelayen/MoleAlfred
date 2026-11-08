@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An Alfred 5 workflow (`fit.mole.alfred`, keyword `mo`) that fronts the [Mole](https://github.com/tw93/Mole) CLI (`mo`) for cleaning, uninstalling, analyzing and monitoring a Mac. There is no package manager, test suite, or linter. Not a git repository.
+An Alfred 5 workflow (`fit.mole.alfred`, keyword `mo`) that fronts the [Mole](https://github.com/tw93/Mole) CLI (`mo`) for cleaning, uninstalling, analyzing and monitoring a Mac. There is no package manager, test suite, or linter. Git repo on `main`, remote `origin` is https://github.com/nigelayen/MoleAlfred (public, MIT). `src/info.plist` and `cache/` are gitignored.
 
 ## Build
 
